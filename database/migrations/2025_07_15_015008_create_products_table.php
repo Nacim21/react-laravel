@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id("product_id");
             $table->string("product_name");
             $table->double("product_price");
-            $table->string("product_category_id")->references('category_id')->on('categories');
-            $table->string("product_supplier_id")->references('supplier_id')->on('suppliers');
+            $table->unsignedBigInteger("product_category_id")->references('category_id')->on('categories');
+            $table->unsignedBigInteger("product_supplier_id")->references('supplier_id')->on('suppliers');
             $table->integer("product_stock");
         });
     }
