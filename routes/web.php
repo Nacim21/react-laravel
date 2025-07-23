@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProductController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -12,9 +14,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
 
-    Route::get('inventory', function () {
-        return Inertia::render('inventory');
-    })->name('inventory');
+    Route::get('inventory', [ProductController::class, 'index'])->name('inventory');
+    Route::get('inventory/create', [ProductController::class, 'create'])->name('inventory.create');
+    Route::get('inventory/test', function () {
+        return Product::with(['supplier','category'])->get();
+    });
 
 });
 
